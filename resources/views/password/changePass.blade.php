@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Shop Thuc</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/fontend/css/bootstrap.min.css') }}">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+        <link href="{{ asset('public/fontend/css/font-awesome.min.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/fontend/css/swiper.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('public/fontend/css/magnify.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="{{ asset('public/fontend/css/xzoom.css') }}">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;1,200;1,400&display=swap"
+            rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="{{ asset('public/fontend/css/28.css') }}" rel="stylesheet" type="text/css" />
+     <style type="text/css">
+    	body{
+    		background: #EA5C54;
+    	}
+    </style>
+</head>
+<body>
+  
+	<div class="login-page">
+	<div class="login-content">
+		<div class="login-header">
+			<a href="{{URL('/login.html')}}"><i class="far fa-arrow-left"  data-toggle="tooltip"   data-html="true" data-placement="right" title="<h6>Quay lại</h6>"></i></a>
+			<h3>Mật khẩu mới</h3>
+		</div>
+		<form method="post" action="{{URL('/changePass.html')}}" id="forgotPasswordForm">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form-group">
+                <input type="password" class="user" name="changeOldPass" id="changeOldPass" placeholder="Nhập mật khẩu cũ của bạn" required="required" />
+                <span class="form-message"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" class="user" name="changeNewPass" id="changNewPass" placeholder="Nhập mật khẩu mới của bạn" required="required" />
+                <span class="form-message"></span>
+            </div>
+            {{-- <div>Expire In <span id="timer"></span></div> --}}
+        <button type="submit" class="btn  btn-block btn-large btn-dn">Gửi</button>
+       
+    </form>
+	</div>
+</div>
+<script src="{{ asset('public/fontend/js/jquery.js') }}"></script>
+<script src="{{ asset('public/fontend/js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('public/fontend/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/fontend/js/validatortuiche.js') }}"></script>
+<script src="{{ asset('public/fontend/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('public/fontend/js/swiper.js') }}"></script>
+{{-- <script src="{{ asset('public/fontend/js/require.js') }}"></script> --}}
+<script src="{{ asset('public/fontend/js/jquery.magnify.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('public/fontend/js/xzoom.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js">
+</script>
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    }); 
+    // const bcrypt = require('bcrypt');
+    Validator({
+            form: '#forgotPasswordForm',
+            errorMessage: '.form-message',
+            rules: [
+                Validator.isRequired('#changeOldPass','Vui lòng không để trống'),       
+                Validator.isMinlength('#changeOldPass',6,'Mậ khẩu không nhỏ hơn 6 ký tự'),
+                // kiểm tra pass trùng khớp vơ mật khẩu cũ
+                Validator.isPasswordNotSame('#changeOldPass','{{ url('/ajaxCheckPasswordNotSame') }}','Mật khẩu cũ không đúng'),
+                Validator.isRequired('#changNewPass','Vui lòng không để trống'),       
+                Validator.isMinlength('#changNewPass',6,'Mậ khẩu không nhỏ hơn 6 ký tự')
+            
+            ]
+    });
+//countdown time OTP
+//     let timerOn = true;
+
+// function timer(remaining) {
+//     var m = Math.floor(remaining / 60);
+//     var s = remaining % 60;
+
+//     m = m < 10 ? '0' + m : m;
+//     s = s < 10 ? '0' + s : s;
+//     document.getElementById('timer').innerHTML = m + ':' + s;
+//     remaining -= 1;
+
+//     if(remaining >= 0 && timerOn) {
+//         setTimeout(function() {
+//             timer(remaining);
+//         }, 1000);
+//         return;
+//     }
+
+//     if(!timerOn) {
+//         // Do validate stuff here
+//         return;
+//     }
+
+//     // Do timeout stuff here
+//     alert('Timeout for otp');
+// }
+
+// timer(120);
+   </script> 
+   <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
+</body>
+
+
