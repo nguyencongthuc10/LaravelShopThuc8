@@ -61,7 +61,7 @@ Route::post('/ajaxCheckPasswordNotSame', 'ValidateController@ajaxCheckPasswordNo
 Route::get('/dashboard', 'AdminController@index');
 Route::get('/admin', 'AdminController@index');
 // Product
-Route::get('/home-add-product', 'ProductController@home');
+
 Route::get('/edit-product/{id_product}', 'ProductController@edit');
 Route::post('/update-product/{id_product}', 'ProductController@update');
 Route::get('/all-product', 'ProductController@show_all');
@@ -89,3 +89,7 @@ Route::get('/un-active-highlight/{id}','ProductController@un_active_highlight');
 Route::get('/all-order','AdminOrderController@all_order');
 Route::get('/info-detail/{id}','AdminOrderController@info_detail');
 Route::get('/order-status/{id}','AdminOrderController@order_status');
+// Comment
+
+Route::post('/commentAjax','CommentController@addComment');
+

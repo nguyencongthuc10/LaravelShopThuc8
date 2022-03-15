@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-
+use Throwable;
 class Handler extends ExceptionHandler
 {
     /**
@@ -30,7 +30,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -48,20 +48,20 @@ class Handler extends ExceptionHandler
     // }
     // nếu không tòn tại route tự chạy về home
    
+ 
 
-
-    public function render($request, Exception $e)
+    public function render($request, Throwable $exception)
     {
-        if($this->isHttpException($e))
+        if($this->isHttpException($exception))
         {
-            switch ($e->getStatusCode()) 
+            switch ($exception->getStatusCode()) 
                 {
                 // not found
-                case 404:
-                return redirect()->guest('home.html');
-                break;
+                // case 404:
+                // return redirect()->guest('home.html');
+                // break;
 
-                // internal error
+                //internal error
                 case '500':
                 return redirect()->guest('home.html');
                 break;
@@ -72,15 +72,18 @@ class Handler extends ExceptionHandler
 
 
                 default:
-                    return $this->renderHttpException($e);
+                    return $this->renderHttpException($exception);
                 break;
             }
-        }
+         }
         else
         {
-                return parent::render($request, $e);
+            return parent::render($request, $exception);
         }
     }
+
+  
+   
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
@@ -95,6 +98,12 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest(route('login'));
+    }
+    public function register()
+    {
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
     
 }

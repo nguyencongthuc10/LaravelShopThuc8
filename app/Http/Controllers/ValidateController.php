@@ -16,7 +16,7 @@ use App\Http\Controllers\LoginController;
 use Carbon\Carbon;
 use Hash;
 use Cache;
-session_start();
+
 
 class ValidateController extends Controller
 {

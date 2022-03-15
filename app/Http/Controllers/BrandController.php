@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Session;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-session_start();
+
 class BrandController extends Controller
 {
     public function home(){

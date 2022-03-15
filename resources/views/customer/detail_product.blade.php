@@ -148,7 +148,22 @@
 				<div role="tabpanel" class="tab-pane fade in active" id="home">
                     {!!$detail_product->content_product!!}
 				</div>
+				
 				<div role="tabpanel" class="tab-pane" id="profile">
+					
+					<div class="form__nhanxet">
+							
+						<label for="#">Nhận xét của bạn</label>
+						<textarea rows="4" cols="50" required class="nhanxet__textarea form-control"></textarea>
+
+							<label for="#">Tên*</label>
+							<input type="text" required class="nhanxet__name form-control">
+
+							<label for=""#>Email*</label>
+							<input type="email" required class="nhanxet__email form-control">
+							<button type="submit" id="submitComent" class="nhanxet__button">Gửi</button>
+						
+					</div>
 					<div class="comment-user">
 						<div class="user-img-user-name">
 							<img src="images/bg-3.jpg" alt="#" width="30px" height="30px">
@@ -184,24 +199,10 @@
 						</div>
 						
 
-						<div class="form__nhanxet">
-							<form action="#" method="POST">
-								<label for="#">Nhận xét của bạn</label>
-								<textarea rows="4" cols="50" required class="nhanxet__textarea form-control"></textarea>
-
-									<label for="#">Tên*</label>
-									<input type="text" required class="nhanxet__name form-control">
-
-									<label for=""#>Email*</label>
-									<input type="email" required class="nhanxet__email form-control">
-									<button type="submit" class="nhanxet__button">Gửi</button>
-								</form>
-							</div>
-
-
-
-						</div>
+					
 					</div>
+				
+				</div>
 				</div>
 			</div>
 			<!-- end -->
@@ -277,3 +278,33 @@
 	</div>
 
     @endsection
+	@section('javascript')
+	<script>
+		$('#submitComent').click(function(){
+			commentAjax(1,1,'annanand','âffafaf','A@gmail.com');
+			
+		});
+		function commentAjax($user_id,$product_id, $content_comment,$name_comment,$email_comment) {
+                    $.ajax({
+                        method: 'post',
+                        url: '{{ url('/commentAjax') }}',
+                        data: {
+                            user_id: $user_id, 
+							product_id: $product_id,
+							content_comment: $content_comment,
+							name_comment: $name_comment,    
+							email_comment: $email_comment, 
+                        },
+                        success: function(data) {
+                            // if (data == '') {
+                            //     $('#load_more_watch').remove();
+                            //     return;
+                            // } else {
+                            //     $('#load_more_watch').remove();
+                            //     $('#product_watch').append(data);
+                            // }
+                        }
+                    });
+                }
+	</script>
+	@endsection

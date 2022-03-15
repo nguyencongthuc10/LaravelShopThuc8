@@ -18,7 +18,7 @@ use App\Http\Controllers\LoginController;
 use Carbon\Carbon;
 
 use Cache;
-session_start();
+
 class LoginController extends Controller
 {
     public function login(){

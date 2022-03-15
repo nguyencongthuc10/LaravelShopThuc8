@@ -8,6 +8,7 @@
  */
 
 /*
+
 |--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
@@ -18,8 +19,15 @@
 | loading any of our classes later on. It feels great to relax.
 |
 */
+// if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+//     require $maintenance;
+// }
 
-require __DIR__.'/bootstrap/autoload.php';
+
+
+require __DIR__.'/./vendor/autoload.php';
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +41,11 @@ require __DIR__.'/bootstrap/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/bootstrap/app.php';
+
+
+$app = require_once __DIR__.'/./bootstrap/app.php';
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,3 +68,5 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+
